@@ -1,0 +1,24 @@
+select {
+  min-width: 300px;
+  width: 20%;
+  height: 50px;
+  padding: 10px;
+  font-size: 24px;
+  margin-bottom: 5%;
+  margin-right: 30px;
+  border-radius: 10px;
+  background-color: rgb(196, 196, 196);
+  border: none;
+  position: relative;
+}
+
+option {
+  padding: 10px;
+  font-size: 24px;
+  margin: 10px;
+  background-color: grey;
+  color: blueviolet;
+  position: absolute;
+  left: 1000px;
+  text-transform: capitalize;
+}
