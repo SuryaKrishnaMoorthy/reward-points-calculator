@@ -18,7 +18,8 @@ export const Months = Object.freeze({
 
 /**
   Calculate rewards for a customer for 3 months
-  By default, January is selected
+  By default, January is selected. If a month is passed,
+  then that is considered as the starting month.
  */
 export const calculateMonthlyRewards = (transactions, firstMonth) => {
   let month;
@@ -37,36 +38,39 @@ export const calculateMonthlyRewards = (transactions, firstMonth) => {
       february: 300,
       march: 200
     }
-    */
+  */
   let rewards = {
     [Months[first]]: 0,
     [Months[second]]: 0,
     [Months[third]]: 0,
   };
 
-  const monthlyRewards =
+  const totalRewards =
     transactions &&
     transactions.reduce((acc, { date, amount }) => {
       const month = new Date(date).getMonth();
 
       if (month === first) {
-        acc[Months[first]] += rewardsForSingleTransaction(amount);
+        acc[Months[first]] += getRewardsForSingleTransaction(amount);
       } else if (month === second) {
-        acc[Months[second]] += rewardsForSingleTransaction(amount);
+        acc[Months[second]] += getRewardsForSingleTransaction(amount);
       } else if (month === third) {
-        acc[Months[third]] += rewardsForSingleTransaction(amount);
+        acc[Months[third]] += getRewardsForSingleTransaction(amount);
       }
 
       return acc;
     }, rewards);
 
-  return monthlyRewards;
+  return totalRewards;
 };
 
 /**
-  calculate rewards for 1 transaction
+  Calculate rewards for a single transaction
+  Business Logic: 2 points for every dollar spent over $100
+  plus 1 point for every dollar spent between $50 and $100
+  E.g, $120 = 2 * $20 + 1 * $50 = 90 points
  */
-const rewardsForSingleTransaction = (amount) => {
+const getRewardsForSingleTransaction = (amount) => {
   let points = 0,
     purchased = amount;
 

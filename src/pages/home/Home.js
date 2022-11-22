@@ -17,7 +17,6 @@ function Home() {
   const [customers, setCustomers] = useState([]);
   const [transactions, setTransactions] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [isTransLoading, setIsTransLoading] = useState(false);
   const [selectedCustomer, setSelectedCustomer] = useState("");
   const [selectedMonth, setSelectedMonth] = useState("");
   const [rewards, setRewards] = useState(null);
@@ -110,7 +109,7 @@ function Home() {
             options={months}
             handleDropdown={handleMonth}
             selected={selectedMonth}
-            placeholder="Select a Month"
+            placeholder="Select a month"
           />
         )}
       </section>

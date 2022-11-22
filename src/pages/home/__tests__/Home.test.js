@@ -51,7 +51,7 @@ describe("Home", () => {
             // Find and select the Nick option, like a real user would.
             screen.getByRole('option', {name: 'Nick'}),
         )
-        expect(screen.getByText('Select a Month').toBeInTheDocument)
+        expect(screen.getByText('Select a month').toBeInTheDocument)
     });
 
     it('should display Rewards table when a customer is selected', async () => {
