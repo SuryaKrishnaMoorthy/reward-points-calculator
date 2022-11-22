@@ -6,7 +6,7 @@ import { calculateMonthlyRewards, Months } from "../../utils";
 import { getCustomers, getTransactionsOfSingleCustomer } from "../../apis/customerApi";
 import "./home.css";
 
-/** Change Months to dropdown format */
+// Change Months to dropdown format
 const months = Object.values(Months).map((month, index) => ({
   id: index,
   label: month,
@@ -22,7 +22,8 @@ function Home() {
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    const getData = async () => {
+    // Get the list of customers
+    const getCustomersList = async () => {
       try {
         setIsLoading(true);
         const res = await getCustomers();
@@ -41,10 +42,11 @@ function Home() {
         setIsLoading(false);
       }
     };
-    getData();
+    getCustomersList();
   }, []);
 
   useEffect(() => {
+    // Get all the transactions of specified customer
     const getCustomerTransactions = async () => {
       try {
         setIsLoading(true);
@@ -70,6 +72,7 @@ function Home() {
   }, [selectedCustomer]);
 
   useEffect(() => {
+    // Get the total rewards of 3 months
     const rewards = calculateMonthlyRewards(transactions, selectedMonth);
     setRewards(rewards);
   }, [selectedMonth]);
@@ -82,25 +85,17 @@ function Home() {
     setSelectedMonth(e.target.value);
   };
 
-  const rewardsTable = () => {
-    if (error) {
-      return <p style={{ textAlign: "center", color: "salmon" }}>{error}</p>;
-    } else if (isLoading) {
-      return <Loading />;
-    } else if (selectedCustomer && rewards) {
-      return <RewardsTable rewards={rewards} />;
-    }
-  };
-
   return (
     <main className="home">
       <section className="dropdown-section">
+        {/* Customer dropdown */}
         <Dropdown
           options={customers}
           handleDropdown={handleCustomer}
           selected={selectedCustomer}
           placeholder="Select a customer"
         />
+        {/* Months dropdown if customer is selected */}
         {selectedCustomer && (
           <Dropdown
             options={months}
@@ -111,6 +106,7 @@ function Home() {
         )}
       </section>
 
+      {/* Rewards table to display reward points of 3 months */}
       <section>
         {selectedCustomer && rewards && <RewardsTable rewards={rewards} />}
       </section>
