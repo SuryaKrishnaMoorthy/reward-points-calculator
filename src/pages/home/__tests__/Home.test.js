@@ -39,7 +39,7 @@ describe("Home", () => {
         expect(screen.getByRole('option', {name: 'Nick'}).selected).toBe(true)
     });
 
-    it('should display Month dropdown when a customer is selected', async () => {
+    it('should display month dropdown when a customer is selected', async () => {
         getCustomers.mockResolvedValue({
             data: [{ "id": 1, "customerName": "Nick"  }],
             });

@@ -4,7 +4,7 @@ import RewardsTable from "../../components/table/RewardsTable";
 import Loading from "../../components/loading/Loading";
 import axios from "axios";
 import { calculateMonthlyRewards, Months } from "../../utils";
-import { getCustomers } from "../../apis/customerApi";
+import { getCustomers, getTransactionsOfSingleCustomer } from "../../apis/customerApi";
 import "./home.css";
 
 /** Change Months to dropdown format */
@@ -49,9 +49,7 @@ function Home() {
     const getCustomerTransactions = async () => {
       try {
         setIsLoading(true);
-        const res = await axios.get(
-          `http://localhost:3001/transactions/?customerId=${selectedCustomer}`
-        );
+        const res = await getTransactionsOfSingleCustomer(selectedCustomer);
         setTransactions(res.data);
         setIsLoading(false);
         const rewards = calculateMonthlyRewards(res.data, selectedMonth);

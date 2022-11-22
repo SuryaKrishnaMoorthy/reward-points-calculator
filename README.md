@@ -19,4 +19,4 @@ each customer per month and total.
 - Run `npm install` in the repo.
 - Run `npx json-server --watch database/db.json -p 3001` to start backend
 - Run `npm start` to start.
-
+- Run `npm run test` to run test cases.
