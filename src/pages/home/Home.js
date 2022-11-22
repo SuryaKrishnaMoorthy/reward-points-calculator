@@ -1,9 +1,10 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Dropdown from "../../components/dropdown/Dropdown";
 import RewardsTable from "../../components/table/RewardsTable";
 import Loading from "../../components/loading/Loading";
+import axios from "axios";
 import { calculateMonthlyRewards, Months } from "../../utils";
+import { getCustomers } from "../../apis/customerApi";
 import "./home.css";
 
 /** Change Months to dropdown format */
@@ -26,7 +27,7 @@ function Home() {
     const getData = async () => {
       try {
         setIsLoading(true);
-        const res = await axios.get("http://localhost:3001/customers");
+        const res = await getCustomers();
         const customerDropdownData = res.data.map(({ id, customerName }) => ({
           id,
           label: customerName,
@@ -36,7 +37,6 @@ function Home() {
       } catch (error) {
         setIsLoading(false);
         setCustomers([]);
-        console.log(error.message);
         setError("Something went wrong!");
         setCustomers([]);
       } finally {

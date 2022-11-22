@@ -17,7 +17,8 @@ export const Months = Object.freeze({
 });
 
 /**
-  Calculate rewards for a customer for 3 monthsjanuary, february, march
+  Calculate rewards for a customer for 3 months
+  By default, January is selected
  */
 export const calculateMonthlyRewards = (transactions, firstMonth) => {
   let month;
