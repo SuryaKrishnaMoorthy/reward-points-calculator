@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Dropdown from "../../components/dropdown/Dropdown";
 import RewardsTable from "../../components/table/RewardsTable";
 import Loading from "../../components/loading/Loading";
-import axios from "axios";
 import { calculateMonthlyRewards, Months } from "../../utils";
 import { getCustomers, getTransactionsOfSingleCustomer } from "../../apis/customerApi";
 import "./home.css";
